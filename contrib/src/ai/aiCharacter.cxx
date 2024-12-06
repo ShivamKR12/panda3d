@@ -1,6 +1,6 @@
 /**
  * PANDA 3D SOFTWARE
- * Copyright (c) Carnegie Mellon University.  All rights reserved.
+ * Copyright ( c ) Carnegie Mellon University.  All rights reserved.
  *
  * All use of this software is subject to the terms of the revised BSD
  * license.  You should have received a copy of this license along
@@ -123,4 +123,46 @@ std::string AICharacter::get_name() {
 
 void AICharacter::set_pf_guide(bool pf_guide) {
   _pf_guide = pf_guide;
+}
+
+/**
+ * Adds a customizable weapon to the AI character.
+ */
+void AICharacter::add_custom_weapon(const std::string &weapon_name, const std::string &weapon_type, float damage, float range) {
+  _steering->add_custom_weapon(weapon_name, weapon_type, damage, range);
+}
+
+/**
+ * Removes a customizable weapon from the AI character.
+ */
+void AICharacter::remove_custom_weapon(const std::string &weapon_name) {
+  _steering->remove_custom_weapon(weapon_name);
+}
+
+/**
+ * Retrieves a customizable weapon from the AI character.
+ */
+CustomWeapon AICharacter::get_custom_weapon(const std::string &weapon_name) const {
+  return _steering->get_custom_weapon(weapon_name);
+}
+
+/**
+ * Adds a customizable enemy to the AI character.
+ */
+void AICharacter::add_custom_enemy(const std::string &enemy_name, const std::string &enemy_type, float health, float speed) {
+  _steering->add_custom_enemy(enemy_name, enemy_type, health, speed);
+}
+
+/**
+ * Removes a customizable enemy from the AI character.
+ */
+void AICharacter::remove_custom_enemy(const std::string &enemy_name) {
+  _steering->remove_custom_enemy(enemy_name);
+}
+
+/**
+ * Retrieves a customizable enemy from the AI character.
+ */
+CustomEnemy AICharacter::get_custom_enemy(const std::string &enemy_name) const {
+  return _steering->get_custom_enemy(enemy_name);
 }

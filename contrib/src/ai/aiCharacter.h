@@ -68,6 +68,14 @@ PUBLISHED:
     explicit AICharacter(std::string model_name, NodePath model_np, double mass, double movt_force, double max_force);
     ~AICharacter();
 
+    void add_custom_weapon(const std::string &weapon_name, const std::string &weapon_type, float damage, float range);
+    void remove_custom_weapon(const std::string &weapon_name);
+    CustomWeapon get_custom_weapon(const std::string &weapon_name) const;
+
+    void add_custom_enemy(const std::string &enemy_name, const std::string &enemy_type, float health, float speed);
+    void remove_custom_enemy(const std::string &enemy_name);
+    CustomEnemy get_custom_enemy(const std::string &enemy_name) const;
+
   MAKE_PROPERTY(name, get_name);
 };
 

@@ -1395,3 +1395,53 @@ bool AIBehaviors::is_off(string ai_type) {
   cout<<"You passed an invalid string, defaulting return value to false!"<<endl;
   return false;
 }
+
+/**
+ * This function adds a customizable weapon to the AI character.
+ */
+void AIBehaviors::add_custom_weapon(const std::string &weapon_name, const std::string &weapon_type, float damage, float range) {
+  _custom_weapons[weapon_name] = CustomWeapon{weapon_type, damage, range};
+}
+
+/**
+ * This function removes a customizable weapon from the AI character.
+ */
+void AIBehaviors::remove_custom_weapon(const std::string &weapon_name) {
+  _custom_weapons.erase(weapon_name);
+}
+
+/**
+ * This function retrieves a customizable weapon from the AI character.
+ */
+CustomWeapon AIBehaviors::get_custom_weapon(const std::string &weapon_name) const {
+  auto it = _custom_weapons.find(weapon_name);
+  if (it != _custom_weapons.end()) {
+    return it->second;
+  }
+  return CustomWeapon{"", 0.0f, 0.0f};
+}
+
+/**
+ * This function adds a customizable enemy to the AI character.
+ */
+void AIBehaviors::add_custom_enemy(const std::string &enemy_name, const std::string &enemy_type, float health, float speed) {
+  _custom_enemies[enemy_name] = CustomEnemy{enemy_type, health, speed};
+}
+
+/**
+ * This function removes a customizable enemy from the AI character.
+ */
+void AIBehaviors::remove_custom_enemy(const std::string &enemy_name) {
+  _custom_enemies.erase(enemy_name);
+}
+
+/**
+ * This function retrieves a customizable enemy from the AI character.
+ */
+CustomEnemy AIBehaviors::get_custom_enemy(const std::string &enemy_name) const {
+  auto it = _custom_enemies.find(enemy_name);
+  if (it != _custom_enemies.end()) {
+    return it->second;
+  }
+  return CustomEnemy{"", 0.0f, 0.0f};
+}

@@ -34,6 +34,18 @@ class ObstacleAvoidance;
 typedef std::list<Flee, std::allocator<Flee> > ListFlee;
 typedef std::list<Evade, std::allocator<Evade> > ListEvade;
 
+struct CustomWeapon {
+  std::string weapon_type;
+  float damage;
+  float range;
+};
+
+struct CustomEnemy {
+  std::string enemy_type;
+  float health;
+  float speed;
+};
+
 /**
  * This class implements all the steering behaviors of the AI framework, such
  * as seek, flee, pursue, evade, wander and flock.  Each steering behavior has
@@ -112,6 +124,9 @@ public:
 
   bool _conflict, _previous_conflict;
 
+  std::map<std::string, CustomWeapon> _custom_weapons;
+  std::map<std::string, CustomEnemy> _custom_enemies;
+
   AIBehaviors();
   ~AIBehaviors();
 
@@ -162,6 +177,13 @@ PUBLISHED:
   void add_static_obstacle(NodePath obstacle);
   void add_dynamic_obstacle(NodePath obstacle);
 
+  void add_custom_weapon(const std::string &weapon_name, const std::string &weapon_type, float damage, float range);
+  void remove_custom_weapon(const std::string &weapon_name);
+  CustomWeapon get_custom_weapon(const std::string &weapon_name) const;
+
+  void add_custom_enemy(const std::string &enemy_name, const std::string &enemy_type, float health, float speed);
+  void remove_custom_enemy(const std::string &enemy_name);
+  CustomEnemy get_custom_enemy(const std::string &enemy_name) const;
 
   void remove_ai(std::string ai_type);
   void pause_ai(std::string ai_type);
